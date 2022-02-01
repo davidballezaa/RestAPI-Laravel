@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Http\Resources\v1\PostResource;
+use App\Http\Resources\v1\{PostResource, PostCollection};
 
 class PostController extends Controller
 {
@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::latest()->paginate(12));
+        return new PostCollection(Post::oldest()->paginate(12));
     }
 
     /**
